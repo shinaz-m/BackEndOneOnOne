@@ -133,5 +133,12 @@ public class EmployeeDataServices implements For_employee {
 	
 	}
 
+
+
+	public Iterable<JSONObject> viewqanda(int id) {
+		// TODO Auto-generated method stub
+		return EmployeeDataRepository.allqanda(id);
+	}
+
 	
 }

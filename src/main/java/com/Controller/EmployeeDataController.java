@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import javax.ws.rs.core.Response;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,9 @@ public class EmployeeDataController {
 
 	@Autowired
 	private EmployeeDataServices usd ;
+	
+	@Autowired
+	private  ManagerDataRepository mdr;
 	
 	
 
@@ -68,14 +72,14 @@ public class EmployeeDataController {
 		usd.addMem(m);
 	}
 	
-	@RequestMapping(path="/drop_formng",method=RequestMethod.PATCH) 
+	@RequestMapping(path="/dropformng",method=RequestMethod.PATCH) 
 	public void DelOneMem(@RequestBody EmployeeData d)
 	{
 		usd.DropMem(d);
 	}
 	
 	
-	@RequestMapping(path="/mngdrop_list",method=RequestMethod.GET) 
+	@RequestMapping(path="/mngdroplist",method=RequestMethod.GET) 
 	public Iterable<EmployeeData> findmlist ()
 	{
 		return usd.droplist();
@@ -92,4 +96,10 @@ public class EmployeeDataController {
 		
 	}
 	
+
+	@RequestMapping(path="/viewqanda",method=RequestMethod.POST)
+	public Iterable<JSONObject> viewqanda(@RequestBody JSONObject idget) {
+		int id=(int)idget.get("id");
+		return usd.viewqanda(id);
+}
 }

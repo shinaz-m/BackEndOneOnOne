@@ -20,6 +20,9 @@ public interface ManagerDataRepository extends CrudRepository<month_values, Inte
 	@Query(value="UPDATE month_values  SET ?1 = 1 where id = ?2 ",nativeQuery=true)
 	public void updatemonth(String month, int id);
 
+	@Query(value="Select COUNT(id) from q_and_a WHERE id=?1",nativeQuery=true)
+	public int idcount(int id);
+
 	//@Text varchar(200)=month;
 	
 //	

@@ -18,6 +18,7 @@ public class QuestionandAnswer {
 	@Column(name = "qid")  
 	private int qid; 	
     
+	
 	@Column(name="id")
 	private int id;
 	
@@ -26,27 +27,20 @@ public class QuestionandAnswer {
     
 	@Column(name= "ans",columnDefinition="varchar(500)")
 	private String ans;
+	
+	@Column (name="qno")
+	private int qno;
     
-	@Column(name="time")
-	private Timestamp time;
+	@Column(name="qtime")
+	private String qtime;
 
 	public int getQid() {
 		return qid;
 	}
 
-	public Timestamp getTime() {
-		return time;
-	}
-
-	public void setTime(Timestamp time) {
-		this.time = time;
-	}
-
 	public void setQid(int qid) {
 		this.qid = qid;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -72,12 +66,42 @@ public class QuestionandAnswer {
 		this.ans = ans;
 	}
 
-	@Override
-	public String toString() {
-		return "QuestionandAnswer [qid=" + qid + ", id=" + id + ", ques=" + ques + ", ans=" + ans + ", time=" + time
-				+ "]";
+	public int getQno() {
+		return qno;
 	}
 
+	public void setQno(int qno) {
+		this.qno = qno;
+	}
+
+	public String getQtime() {
+		return qtime;
+	}
+
+	public void setQtime(String qtime) {
+		this.qtime = qtime;
+	}
+
+	@Override
+	public String toString() {
+		return "QuestionandAnswer [qid=" + qid + ", id=" + id + ", ques=" + ques + ", ans=" + ans + ", qno=" + qno
+				+ ", qtime=" + qtime + "]";
+	}
+
+	
+	public QuestionandAnswer(int qid, int id, String ques, String ans, int qno, String qtime) {
+		//super();
+		this.qid = qid;
+		this.id = id;
+		this.ques = ques;
+		this.ans = ans;
+		this.qno = qno;
+		this.qtime = qtime;
+	}
+ public QuestionandAnswer()
+ {
+	 
+ }
 
 
 	

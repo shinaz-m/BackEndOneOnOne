@@ -7,4 +7,5 @@ public interface For_mng {
 	
 public Mn_create man(Mn_create z);
 
+
 }

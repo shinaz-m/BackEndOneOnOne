@@ -42,4 +42,33 @@ public class ManagerDatacontroller {
 		int id=(int)m.get("id");
  		mng.updatemonth(month,id);
 	}
+	
+	@RequestMapping(path="/qanda_dynamic",method=RequestMethod.POST) 
+	public void QAns(@RequestBody JSONObject q) 
+	{   
+		int id=(int)q.get("id");
+		String ques=(String)q.get("q1");
+		String ans=(String)q.get("a1");
+		mng.qandsdynamic(id,ques,ans);
+	}
+	
+	@RequestMapping(path="/qanda_static",method=RequestMethod.POST) 
+	public void QAns1(@RequestBody JSONObject qq) 
+	{
+		int id=(int)qq.get("id");
+		String q1=(String)qq.get("q1");
+		String a1=(String)qq.get("a1");
+		String q2=(String)qq.get("q2");
+		String a2=(String)qq.get("a2");
+		String q3=(String)qq.get("q3");
+		String a3=(String)qq.get("a3");
+		String q4=(String)qq.get("q4");
+		String a4=(String)qq.get("a4");
+		String q5=(String)qq.get("q5"); 
+		String a5=(String)qq.get("a5");
+		 mng.qandstatic(id,q1,a1,q2,a2,q3,a3,q4,a4,q5,a5);
+	}
+
+	
+
 }

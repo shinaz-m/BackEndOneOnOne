@@ -50,4 +50,7 @@ public interface EmployeeDataRepository  extends CrudRepository<EmployeeData,Int
 	@Query(value="Insert into month_values (id) values(?1)",nativeQuery=true)
 	public void month_valueupdate(int id);
 
+	@Query(value="Select  id, qno, ques, ans from q_and_a where id=?1",nativeQuery=true)
+	public Iterable<JSONObject> allqanda(int id);
+
 	}

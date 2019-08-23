@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan({"com.Controller","com.Services"})
 @EnableJpaRepositories("com.DataRepositories")
-public class SignUpApiApplication {
+public class OneonOne {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SignUpApiApplication.class, args);
+		SpringApplication.run(OneonOne.class, args);
 	}
 
 }

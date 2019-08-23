@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import javax.ws.rs.core.Response;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Services.EmployeeDataServices;
 import com.nineleaps.OneonOne.EmployeeData;
-import com.nineleaps.OneonOne.Hr__view;
+import com.nineleaps.OneonOne.ManHr;
 //import com.nineleaps.SignUpApi.UserData;
 import com.nineleaps.OneonOne.Mn_create;
+import com.nineleaps.OneonOne.egoal;
 
 @Transactional
 @RestController
@@ -35,9 +35,6 @@ public class EmployeeDataController {
 
 	@Autowired
 	private EmployeeDataServices usd ;
-	
-	@Autowired
-	private  ManagerDataRepository mdr;
 	
 	
 
@@ -85,6 +82,12 @@ public class EmployeeDataController {
 		return usd.droplist();
 	}
 	
+	@RequestMapping(path="/viewgoal",method=RequestMethod.POST) 
+	public Iterable<JSONObject> goallist(@RequestBody egoal g )
+	{
+		return usd.viewgoal(g.getId());
+	}
+
 	
 	
 	@RequestMapping(path="/login",method=RequestMethod.POST,produces="application/json")
@@ -96,10 +99,12 @@ public class EmployeeDataController {
 		
 	}
 	
-
-	@RequestMapping(path="/viewqanda",method=RequestMethod.POST)
-	public Iterable<JSONObject> viewqanda(@RequestBody JSONObject idget) {
+	@RequestMapping(path="/viewqanda",method=RequestMethod.POST) 
+	public Iterable<JSONObject> viewqanda(@RequestBody JSONObject idget){
 		int id=(int)idget.get("id");
 		return usd.viewqanda(id);
-}
+	}
+	
+	
+	
 }

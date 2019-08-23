@@ -18,7 +18,6 @@ public class QuestionandAnswer {
 	@Column(name = "qid")  
 	private int qid; 	
     
-	
 	@Column(name="id")
 	private int id;
 	
@@ -33,6 +32,17 @@ public class QuestionandAnswer {
     
 	@Column(name="qtime")
 	private String qtime;
+	
+	@Column(name="remark",columnDefinition="varchar(500)")
+	private String remark;
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	public int getQid() {
 		return qid;
@@ -85,25 +95,11 @@ public class QuestionandAnswer {
 	@Override
 	public String toString() {
 		return "QuestionandAnswer [qid=" + qid + ", id=" + id + ", ques=" + ques + ", ans=" + ans + ", qno=" + qno
-				+ ", qtime=" + qtime + "]";
+				+ ", qtime=" + qtime + ", remark=" + remark + "]";
 	}
 
 	
-	public QuestionandAnswer(int qid, int id, String ques, String ans, int qno, String qtime) {
-		//super();
-		this.qid = qid;
-		this.id = id;
-		this.ques = ques;
-		this.ans = ans;
-		this.qno = qno;
-		this.qtime = qtime;
-	}
- public QuestionandAnswer()
- {
-	 
- }
-
-
+	
 	
 
 }

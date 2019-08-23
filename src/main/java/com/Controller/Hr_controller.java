@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 //import com.Services.EmployeeDataServices;
 import com.Services.MonthValueService;
-import com.nineleaps.OneonOne.Hr__view;
+import com.nineleaps.OneonOne.ManHr;
 @Transactional
 @RestController
 @CrossOrigin
@@ -20,7 +20,7 @@ public class Hr_controller {
 	@Autowired
 	private MonthValueService mvs ;
 	@RequestMapping(path="/add_val",method=RequestMethod.POST) 
-	public Hr__view AddMthVal(@RequestBody Hr__view x)
+	public ManHr AddMthVal(@RequestBody ManHr x)
 	{
 		return mvs.val(x);
 	}

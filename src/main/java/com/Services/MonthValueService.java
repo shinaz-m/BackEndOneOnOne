@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.DataRepositories.*;
 
 import com.Interface.For_hr;
-import com.nineleaps.OneonOne.Hr__view;
+import com.nineleaps.OneonOne.ManHr;
 
 @Transactional
 @Service
@@ -17,7 +17,7 @@ public class MonthValueService implements For_hr {
 	private MnthStatus MnthStatus;
 	
 	
-	 public Hr__view val(Hr__view x) {
+	 public ManHr val(ManHr x) {
 		 return MnthStatus.save(x);
 	 }
 }

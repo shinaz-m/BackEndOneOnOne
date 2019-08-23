@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.nineleaps.OneonOne.EmployeeData;
 import com.nineleaps.OneonOne.Mn_create;
+import com.nineleaps.OneonOne.egoal;
 //import com.nineleaps.SignUpApi.UserData;
 @Transactional
 @Repository
@@ -23,7 +24,7 @@ public interface EmployeeDataRepository  extends CrudRepository<EmployeeData,Int
     public String findByEmail(String email);
 
 	
-	@Query(value="SELECT x.id, x.empname, y.month, y.value FROM emp_data x left join hr__view y on x.id = y.id",nativeQuery=true)
+	@Query(value="SELECT x.id, x.empname, y.month, y.value FROM emp_data x left join man_hr y on x.id = y.id WHERE x.id=y.id",nativeQuery=true)
 	public Iterable<JSONObject> emps_list();
 	
 	@Query(value="SELECT a.id, a.empname FROM emp_data a WHERE mid=?1",nativeQuery=true)
@@ -50,7 +51,10 @@ public interface EmployeeDataRepository  extends CrudRepository<EmployeeData,Int
 	@Query(value="Insert into month_values (id) values(?1)",nativeQuery=true)
 	public void month_valueupdate(int id);
 
-	@Query(value="Select  id, qno, ques, ans from q_and_a where id=?1",nativeQuery=true)
+    @Query (value="Select id,qno,ques,ans from q_and_a where id=?1",nativeQuery=true)
 	public Iterable<JSONObject> allqanda(int id);
+
+    @Query(value="SELECT  b.empname FROM EmployeeData b WHERE mid=0")
+	public Iterable<egoal> goallist();
 
 	}

@@ -6,6 +6,7 @@ import com.nineleaps.OneonOne.Mn_create;
 public interface For_mng {
 	
 public Mn_create man(Mn_create z);
+//public void qandsdynamic(int id, String ques, String ans);
 
 
 }

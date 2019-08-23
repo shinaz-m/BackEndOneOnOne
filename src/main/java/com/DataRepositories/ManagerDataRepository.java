@@ -23,11 +23,10 @@ public interface ManagerDataRepository extends CrudRepository<month_values, Inte
 	@Query(value="Select COUNT(id) from q_and_a WHERE id=?1",nativeQuery=true)
 	public int idcount(int id);
 
-	//@Text varchar(200)=month;
 	
-//	
-//	@Modifying
-//	@Query("update EARAttachment ear set ear.status = :status where ear.id = :id")
-//	int setStatusForEARAttachment(@Param("status") Integer status, @Param("id") Long id);
+	@Query(value="SELECT g.goal, g.gtime FROM egoal g WHERE id=?1",nativeQuery=true)
+	 public Iterable<JSONObject> goallist(int g);
+
+	
 	}
 

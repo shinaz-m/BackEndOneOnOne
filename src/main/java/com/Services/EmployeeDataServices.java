@@ -10,6 +10,7 @@ import com.nineleaps.OneonOne.EmployeeData;
 //import com.nineleaps.SignUpApi.UserData;
 //import com.nineleaps.SignUpApi.ProjectIdAndName;
 import com.nineleaps.OneonOne.Mn_create;
+import com.nineleaps.OneonOne.egoal;
 import com.nineleaps.OneonOne.month_values;
 
 import java.util.regex.Matcher;
@@ -40,7 +41,7 @@ public class EmployeeDataServices implements For_employee {
 	String s,s1,e; 
 	@Autowired
 	private EmployeeDataRepository EmployeeDataRepository;
-	
+	//private empgoalsRepository emprepo;
 	@Autowired
 	private ManagerDataRepository mr;
 	public month_values mv=new month_values();
@@ -136,9 +137,17 @@ public class EmployeeDataServices implements For_employee {
 
 
 	public Iterable<JSONObject> viewqanda(int id) {
-		// TODO Auto-generated method stub
 		return EmployeeDataRepository.allqanda(id);
 	}
 
+
+
+	public Iterable<JSONObject> viewgoal(int g) {
+		// TODO Auto-generated method stub
+		
+			 return mr.goallist(g);
+		 }
+	}
+
 	
-}
+

@@ -14,8 +14,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 //import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
-@Table(name="Hr__view")
-public class Hr__view {
+@Table(name="man_hr")
+public class ManHr {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int h_id;
@@ -29,23 +29,15 @@ public class Hr__view {
 		return value;
 	}
 
-	public void setJan(String jan) {
-		this.jan = jan;
-	}
+	
 
 
-
-	@Column(name="jan",columnDefinition="varchar(255) default '0'",table ="hr__view")
-	private String jan="No";
 	
 	
-	public String getJan() {
-		return jan;
-	}
+	
 
 
-
-	@Column(name="value",columnDefinition="varchar(255) default 'No'",table ="hr__view")
+	@Column(name="value",columnDefinition="varchar(255) default 'No'",table ="man_hr")
 	private String value="No";
 	
 	 

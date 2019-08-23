@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Services.ManagerDataServices;
 import com.nineleaps.OneonOne.EmployeeData;
+import com.nineleaps.OneonOne.ManHr;
 import com.nineleaps.OneonOne.Mn_create;
+import com.nineleaps.OneonOne.egoal;
 
 @Transactional
 @RestController
@@ -49,7 +51,8 @@ public class ManagerDatacontroller {
 		int id=(int)q.get("id");
 		String ques=(String)q.get("q1");
 		String ans=(String)q.get("a1");
-		mng.qandsdynamic(id,ques,ans);
+		String remark=(String)q.get("rmk");
+		mng.qandsdynamic(id,ques,ans,remark);
 	}
 	
 	@RequestMapping(path="/qanda_static",method=RequestMethod.POST) 
@@ -68,7 +71,19 @@ public class ManagerDatacontroller {
 		String a5=(String)qq.get("a5");
 		 mng.qandstatic(id,q1,a1,q2,a2,q3,a3,q4,a4,q5,a5);
 	}
-
 	
+	
+	@RequestMapping(path="/add_goals",method=RequestMethod.POST) 
+	public void AddMthVal(@RequestBody JSONObject g)
+	{
+		int id=(int)g.get("id");
+		String goal=(String)g.get("goal");
+		String gtime=(String)g.get("gtime");
+	    mng.goal(id,goal,gtime);
+	}
+
+
+
+
 
 }

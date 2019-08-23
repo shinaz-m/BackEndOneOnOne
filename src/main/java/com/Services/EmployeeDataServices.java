@@ -10,7 +10,7 @@ import com.nineleaps.OneonOne.EmployeeData;
 //import com.nineleaps.SignUpApi.UserData;
 //import com.nineleaps.SignUpApi.ProjectIdAndName;
 import com.nineleaps.OneonOne.Mn_create;
-import com.nineleaps.OneonOne.egoal;
+import com.nineleaps.OneonOne.Employeegoals;
 import com.nineleaps.OneonOne.month_values;
 
 import java.util.regex.Matcher;

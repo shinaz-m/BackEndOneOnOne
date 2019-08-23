@@ -14,7 +14,7 @@ import com.Services.ManagerDataServices;
 import com.nineleaps.OneonOne.EmployeeData;
 import com.nineleaps.OneonOne.ManHr;
 import com.nineleaps.OneonOne.Mn_create;
-import com.nineleaps.OneonOne.egoal;
+import com.nineleaps.OneonOne.Employeegoals;
 
 @Transactional
 @RestController

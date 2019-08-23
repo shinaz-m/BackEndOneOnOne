@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 
 import com.DataRepositories.ManagerDataRepository;
 import com.DataRepositories.ManagerQuestionandAnswerRepository;
-import com.DataRepositories.empgoalsRepository;
+import com.DataRepositories.EmployeegoalsRepository;
 import com.Interface.For_mng;
 import com.nineleaps.OneonOne.EmployeeData;
 import com.nineleaps.OneonOne.Mn_create;
 import com.nineleaps.OneonOne.QuestionandAnswer;
-import com.nineleaps.OneonOne.egoal;
+import com.nineleaps.OneonOne.Employeegoals;
 import com.nineleaps.OneonOne.month_values;
 
 @Transactional
@@ -30,7 +30,7 @@ public class ManagerDataServices implements For_mng{
 	@Autowired
 	private ManagerQuestionandAnswerRepository mqanda;
 	@Autowired
-	private empgoalsRepository emprepo;
+	private EmployeegoalsRepository emprepo;
 	QuestionandAnswer qq1= new QuestionandAnswer();
 	QuestionandAnswer qq2= new QuestionandAnswer();
 	QuestionandAnswer qq3= new QuestionandAnswer();
@@ -39,7 +39,7 @@ public class ManagerDataServices implements For_mng{
 	QuestionandAnswer qq6= new QuestionandAnswer();
 	
 	
-	egoal gg=new egoal();
+	Employeegoals gg=new Employeegoals();
 	
 	public month_values mv=new month_values();
 	public Mn_create man(Mn_create z) {

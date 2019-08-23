@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 
-import com.nineleaps.OneonOne.egoal;
+import com.nineleaps.OneonOne.Employeegoals;
 
-public interface empgoalsRepository extends CrudRepository<egoal,Integer> {
+public interface EmployeegoalsRepository extends CrudRepository<Employeegoals,Integer> {
 	
 
 }

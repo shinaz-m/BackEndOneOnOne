@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.nineleaps.OneonOne.EmployeeData;
 import com.nineleaps.OneonOne.Mn_create;
-import com.nineleaps.OneonOne.egoal;
+import com.nineleaps.OneonOne.Employeegoals;
 //import com.nineleaps.SignUpApi.UserData;
 @Transactional
 @Repository
@@ -55,6 +55,6 @@ public interface EmployeeDataRepository  extends CrudRepository<EmployeeData,Int
 	public Iterable<JSONObject> allqanda(int id);
 
     @Query(value="SELECT  b.empname FROM EmployeeData b WHERE mid=0")
-	public Iterable<egoal> goallist();
+	public Iterable<Employeegoals> goallist();
 
 	}

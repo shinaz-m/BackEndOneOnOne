@@ -17,14 +17,14 @@ For building and running the application you need:
 - [MySql](https://www.mysql.com/):It is a full-featured relational database management system (RDBMS)
 
 
-**  Installation**
+**Installation**
 
 - --[Mysql installation and configuration](https://support.rackspace.com/how-to/installing-mysql-server-on-ubuntu/)
 - --[Link to install JDK 1.8](http://tipsonubuntu.com/2016/07/31/install-oracle-java-8-9-ubuntu-16-04-linux-mint-18)
 - --[Link to install Spring Tool Suite](https://spring.io/tools)
 
 
-**  Running the application locally**
+**Running the application locally**
 
 There are several ways to run a Spring Boot application on your local machine. One way is to execute the main method in the OneOnOne-master/src/main/java/com/nineleaps/OneonOne/OneonOne.Application  class from your IDE.
 

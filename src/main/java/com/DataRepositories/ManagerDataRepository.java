@@ -27,6 +27,41 @@ public interface ManagerDataRepository extends CrudRepository<month_values, Inte
 	@Query(value="SELECT g.goal, g.gtime FROM egoal g WHERE id=?1",nativeQuery=true)
 	 public Iterable<JSONObject> goallist(int g);
 
-	
+	@Modifying
+	@Query(value="UPDATE month_values set jan=1 where id=?1",nativeQuery=true)
+	public void jan(int id);
+	@Modifying
+	@Query(value="UPDATE month_values set feb=1 where id=?1",nativeQuery=true)
+	public void feb(int id);
+	@Modifying
+	@Query(value="UPDATE month_values set mar=1 where id=?1",nativeQuery=true)
+	public void mar(int id);
+	@Modifying
+	@Query(value="UPDATE  month_values set apr=1 where id=?1",nativeQuery=true)
+	public void apr(int id);
+	@Modifying
+	@Query(value="UPDATE  month_values set may=1 where id=?1",nativeQuery=true)
+	public void may(int id);
+	@Modifying
+	@Query(value="UPDATE  month_values set june=1 where id=?1",nativeQuery=true)
+	public void june(int id);
+	@Modifying
+	@Query(value="UPDATE  month_values set july=1 where id=?1",nativeQuery=true)
+	public void july(int id);
+	@Modifying
+	@Query(value="UPDATE  month_values set aug=1 where id=?1",nativeQuery=true)
+	public void aug(int id);
+	@Modifying
+	@Query(value="UPDATE  month_values set sep=1 where id=?1",nativeQuery=true)
+	public void sept(int id);
+	@Modifying
+	@Query(value="UPDATE  month_values set oct=1 where id=?1",nativeQuery=true)
+	public void oct(int id);
+	@Modifying
+	@Query(value="UPDATE month_values set  nov=1 where id=?1",nativeQuery=true)
+	public void nov(int id);
+	@Modifying
+	@Query(value="UPDATE  month_values set december=1 where id=?1",nativeQuery=true)
+	public void dec(int id);
 	}
 

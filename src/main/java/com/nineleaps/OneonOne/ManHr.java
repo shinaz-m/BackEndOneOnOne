@@ -24,7 +24,8 @@ public class ManHr {
 	@Column(name="month")
 	private String month;
 	
-
+//	@Column(name="1")
+//	private String number;
 	public String getValue() {
 		return value;
 	}

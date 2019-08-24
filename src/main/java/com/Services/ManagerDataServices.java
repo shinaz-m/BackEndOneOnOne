@@ -55,32 +55,32 @@ public class ManagerDataServices implements For_mng{
 		
 		
 		if(month.equals("jan"))
-		mv.setJan(1);
-		else if(month.equals("feb"))
-		mv.setFeb(1);
-		else if(month.equals("mar"))
-		mv.setMar(1);
-		else if(month.equals("apr"))
-		mv.setApr(1);
-		else if(month.equals("may"))
-		mv.setMay(1);
-		else if(month.equals("jun"))
-		mv.setJune(1);
-		else if(month.equals("july"))
-		mv.setJuly(1);
-		else if(month.equals("aug"))
-		mv.setAug(1);
-		else if(month.equals("sep"))
-		mv.setSep(1);
-		else if(month.equals("oct"))
-		mv.setOct(1);
-		else if(month.equals("nov"))
-		mv.setNov(1);
-		else if(month.equals("december"))
-		mv.setDecember(1);
+			ManagerDataRepository.jan(id);
+			else if(month.equals("feb"))
+			ManagerDataRepository.feb(id);
+			else if(month.equals("mar"))
+			ManagerDataRepository.mar(id);
+			else if(month.equals("apr"))
+			ManagerDataRepository.apr(id);
+			else if(month.equals("may"))
+			ManagerDataRepository.may(id);
+			else if(month.equals("june"))
+			ManagerDataRepository.june(id);
+			else if(month.equals("july"))
+			ManagerDataRepository.july(id);
+			else if(month.equals("aug"))
+			ManagerDataRepository.aug(id);
+			else if(month.equals("sep"))
+			ManagerDataRepository.sept(id);
+			else if(month.equals("oct"))
+			ManagerDataRepository.oct(id);
+			else if(month.equals("nov"))
+			ManagerDataRepository.nov(id);
+			else if(month.equals("december"))
+			ManagerDataRepository.dec(id);
 				
-		mv.setId(id);
-		ManagerDataRepository.save(mv);
+		//mv.setId(id);
+	//	ManagerDataRepository.save(mv);
 		}
 	
 	

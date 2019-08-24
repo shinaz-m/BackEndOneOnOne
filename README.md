@@ -17,14 +17,14 @@ For building and running the application you need:
 - [MySql](https://www.mysql.com/)
 - [WebStorm](https://www.jetbrains.com/webstorm/)
 
-**  Installation**
+**Installation**
 
 - --Mysql installation and configuration (or give a link to install mysql on ubuntu machine).
 - --Link to install and configure visual studio
 - --Link how to create a maven based project
 - --Link to install JDK 1.8
 
-**  Running the application locally**
+**Running the application locally**
 
 There are several ways to run a Spring Boot application on your local machine. One way is to execute the main method in the OneOnOne-master/src/main/java/com/nineleaps/OneonOne/OneonOne.Application  class from your IDE.
 

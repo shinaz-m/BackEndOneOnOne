@@ -5,10 +5,13 @@ import com.DataRepositories.*;
 import com.Services.*;
 import com.nineleaps.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
+import org.apache.catalina.connector.Response;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import javax.ws.rs.core.Response;
@@ -91,7 +94,7 @@ public class EmployeeDataController {
 	
 	
 	@RequestMapping(path="/login",method=RequestMethod.POST,produces="application/json")
-	public JSONObject Authenticate(@RequestBody JSONObject user) {
+	public ResponseEntity<JSONObject> Authenticate(@RequestBody JSONObject user) {
 		//JSONObject j=new JSONObject(user);
 		String email=(String)user.get("email");
 		String password=(String)user.get("password");

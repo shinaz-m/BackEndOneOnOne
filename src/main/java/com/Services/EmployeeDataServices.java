@@ -23,10 +23,13 @@ import org.json.simple.JSONObject;
 //import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 @Transactional
 @Service
 public class EmployeeDataServices implements For_employee {
@@ -120,16 +123,20 @@ public class EmployeeDataServices implements For_employee {
 	
 	
 	
-	public JSONObject authenticate(String email,String password)
+	public ResponseEntity<JSONObject> authenticate(String email,String password)
 	{
 		String l=EmployeeDataRepository.findByEmail(email);
+		JSONObject var=new JSONObject();
 		if(encoder.matches(password,l))
 		{
-			return EmployeeDataRepository.profile(email);
+		var=EmployeeDataRepository.profile(email);
+		var.put("status","true");
+			return new ResponseEntity<>(var,HttpStatus.OK);
 	}
 		else
 		{
-			return null;
+			var.put("status","false");
+			return new ResponseEntity<>(var,HttpStatus.OK);
 		}
 	
 	}

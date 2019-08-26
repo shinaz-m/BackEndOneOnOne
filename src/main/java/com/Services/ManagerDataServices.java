@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.DataRepositories.ManagerDataRepository;
 import com.DataRepositories.ManagerQuestionandAnswerRepository;
+import com.DataRepositories.EmployeeDataRepository;
 import com.DataRepositories.EmployeegoalsRepository;
 import com.Interface.For_mng;
 import com.nineleaps.OneonOne.EmployeeData;
@@ -31,6 +32,8 @@ public class ManagerDataServices implements For_mng{
 	private ManagerQuestionandAnswerRepository mqanda;
 	@Autowired
 	private EmployeegoalsRepository emprepo;
+	@Autowired
+	private EmployeeDataRepository er;
 	QuestionandAnswer qq1= new QuestionandAnswer();
 	QuestionandAnswer qq2= new QuestionandAnswer();
 	QuestionandAnswer qq3= new QuestionandAnswer();
@@ -51,7 +54,7 @@ public class ManagerDataServices implements For_mng{
 		return ManagerDataRepository.emp_prog(id);
 	}
 
-	public void updatemonth(String month, int id) {
+	public Iterable<JSONObject> updatemonth(String month, int id) {
 		
 		
 		if(month.equals("jan"))
@@ -78,7 +81,13 @@ public class ManagerDataServices implements For_mng{
 			ManagerDataRepository.nov(id);
 			else if(month.equals("december"))
 			ManagerDataRepository.dec(id);
-				
+	
+		//if(ManagerDataRepository.idcount(id)>0)
+		
+		return er.allqanda(id);	
+		
+		
+	
 		//mv.setId(id);
 	//	ManagerDataRepository.save(mv);
 		}

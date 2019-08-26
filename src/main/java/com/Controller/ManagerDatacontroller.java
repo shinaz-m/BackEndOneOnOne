@@ -38,20 +38,21 @@ public class ManagerDatacontroller {
 	}
 	
 	@RequestMapping(path="/updatemonthvalue",method=RequestMethod.PATCH)
-	public void updatemonth(@RequestBody JSONObject m)
+	public Iterable<JSONObject> updatemonth(@RequestBody JSONObject m)
 	{
 		String month=(String)m.get("month");
 		int id=(int)m.get("id");
- 		mng.updatemonth(month,id);
+ 		return mng.updatemonth(month,id);
+		
 	}
 	
 	@RequestMapping(path="/qanda_dynamic",method=RequestMethod.POST) 
 	public void QAns(@RequestBody JSONObject q) 
 	{   
 		int id=(int)q.get("id");
-		String ques=(String)q.get("q1");
-		String ans=(String)q.get("a1");
-		String remark=(String)q.get("rmk");
+		String ques=(String)q.get("q");
+		String ans=(String)q.get("a");
+		String remark=(String)q.get("remark");
 		mng.qandsdynamic(id,ques,ans,remark);
 	}
 	

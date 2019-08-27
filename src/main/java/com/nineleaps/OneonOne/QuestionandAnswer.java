@@ -31,14 +31,28 @@ public class QuestionandAnswer {
 	private int qno;
     
 	@Column(name="qtime")
-	private String qtime;
+	private java.sql.Timestamp qtime;
 	
 	@Column(name="remark",columnDefinition="varchar(500)")
 	private String remark;
 
+	@Column(name="month")
+	private String month;
+	
 	public String getRemark() {
 		return remark;
 	}
+	
+
+	public String getMonth() {
+		return month;
+	}
+
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
 
 	public void setRemark(String remark) {
 		this.remark = remark;
@@ -84,19 +98,24 @@ public class QuestionandAnswer {
 		this.qno = qno;
 	}
 
-	public String getQtime() {
+	public java.sql.Timestamp getQtime() {
 		return qtime;
 	}
 
-	public void setQtime(String qtime) {
-		this.qtime = qtime;
+	public void setQtime(java.sql.Timestamp Mil) {
+		this.qtime = Mil;
 	}
+
 
 	@Override
 	public String toString() {
 		return "QuestionandAnswer [qid=" + qid + ", id=" + id + ", ques=" + ques + ", ans=" + ans + ", qno=" + qno
-				+ ", qtime=" + qtime + ", remark=" + remark + "]";
+				+ ", qtime=" + qtime + ", remark=" + remark + ", month=" + month + "]";
 	}
+
+
+
+	
 
 	
 	

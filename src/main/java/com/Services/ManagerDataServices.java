@@ -1,12 +1,18 @@
 package com.Services;
 
-import java.security.Timestamp;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.transaction.Transactional;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.PagedResources;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.DataRepositories.ManagerDataRepository;
@@ -39,7 +45,7 @@ public class ManagerDataServices implements For_mng{
 	QuestionandAnswer qq3= new QuestionandAnswer();
 	QuestionandAnswer qq4= new QuestionandAnswer();
 	QuestionandAnswer qq5= new QuestionandAnswer();
-	QuestionandAnswer qq6= new QuestionandAnswer();
+	
 	
 	
 	Employeegoals gg=new Employeegoals();
@@ -84,7 +90,7 @@ public class ManagerDataServices implements For_mng{
 	
 		//if(ManagerDataRepository.idcount(id)>0)
 		
-		return er.allqanda(id);	
+		return er.allqanda(id,month);	
 		
 		
 	
@@ -94,56 +100,82 @@ public class ManagerDataServices implements For_mng{
 	
 	
 	
-	int id1=qq5.getQid();
+	///int id1=qq5.getQid();
 	
-	public void qandstatic(int id, String q1, String a1, String q2, String a2, String q3, String a3, String q4,
-			String a4, String q5, String a5) {
-		
-		long Mil=System.currentTimeMillis();
-		Date d=new Date(Mil);
 	
-		
-		qq1.setId(id);qq1.setQues(q1);qq1.setAns(a1);qq1.setQno(1);qq1.setQtime(d.toString());qq1.setQid(id1++);
-		//q2,a2,q3,a3,q4,a4,q5,a5
-		 qq2.setId(id);qq2.setQues(q2);qq2.setAns(a2);qq2.setQno(2);qq2.setQtime(d.toString());qq2.setQid(id1++);
-		 qq3.setId(id);qq3.setQues(q3);qq3.setAns(a3);qq3.setQno(3);qq3.setQtime(d.toString());qq3.setQid(id1++);
-		 qq4.setId(id);qq4.setQues(q4);qq4.setAns(a4);qq4.setQno(4);qq4.setQtime(d.toString());qq4.setQid(id1++);
-		 qq5.setId(id);qq5.setQues(q5);qq5.setAns(a5);qq5.setQno(5);qq5.setQtime(d.toString());qq5.setQid(id1++);
+	public Iterable<JSONObject> qandstatic(int id, String q1, String a1, String q2, String a2, String q3, String a3, String q4,
+			String a4, String q5, String a5,String month){
+	
+		Timestamp Mil=new Timestamp(System.currentTimeMillis());
+		int id1=0;
+		int count=ManagerDataRepository.idcount(id,month);
+		if(count>0) {
+			id1=ManagerDataRepository.findqid(id,1,month);
+			System.out.println(id1);
+		}
+		//System.out.println(id1++);
+		qq1.setId(id);qq1.setQues(q1);qq1.setAns(a1);qq1.setQno(1);qq1.setQtime(Mil);qq1.setQid(id1++);qq1.setMonth(month);
+		 qq2.setId(id);qq2.setQues(q2);qq2.setAns(a2);qq2.setQno(2);qq2.setQtime(Mil);qq2.setQid(id1++);qq2.setMonth(month);
+		 qq3.setId(id);qq3.setQues(q3);qq3.setAns(a3);qq3.setQno(3);qq3.setQtime(Mil);qq3.setQid(id1++);qq3.setMonth(month);
+		 qq4.setId(id);qq4.setQues(q4);qq4.setAns(a4);qq4.setQno(4);qq4.setQtime(Mil);qq4.setQid(id1++);qq4.setMonth(month);
+		 qq5.setId(id);qq5.setQues(q5);qq5.setAns(a5);qq5.setQno(5);qq5.setQtime(Mil);qq5.setQid(id1++);qq5.setMonth(month);
 		 mqanda.save(qq1);
 		 mqanda.save(qq2);
 		 mqanda.save(qq3);
 		 mqanda.save(qq4);
 		 mqanda.save(qq5);
+		
+		 return er.allqanda(id,month);	
+			
 	}
 	
-	int id2=qq6.getQid();
+	//int id2=qq5.getQid();
 	int qn=6;
 	
-	public void qandsdynamic(int id, String ques, String ans,String remark) {
-		
-		
-		long Mil=System.currentTimeMillis();
-		Date o=new Date(Mil);
-		int qn=ManagerDataRepository.idcount(id);
-		
-		//qq6.setQtime(o.toString());
-		//id2++;
-		 qq6.setId(id);qq6.setQues(ques);qq6.setAns(ans);qq6.setQno(qn);qq6.setRemark(remark);qq6.setQtime(o.toString());qq6.setQid(id2++);
-          qn++;
-         // System.out.println(qq6.getPques());
-          mqanda.save(qq6);
-	}
 
 	public void goal(int id, String goal, String gtime) {
 		gg.setId(id);gg.setGoal(goal);gg.setGtime(gtime);
 		emprepo.save(gg)	;
 	}
 
+	public void qandadynamic(JSONObject[] object) {
+	//	System.out.println("hello");
+		int id2=0;
+		int qno=6;
+		System.out.println(qq5.getQid());
+			for(int i=0;i<object.length;i++)
+        {
+		//	System.out.println(object.length+"\t"+i);
+        	int id=(int)object[i].get("id");
+        	String ques=(String)object[i].get("q");
+        	String ans=(String)object[i].get("a");
+        	String remark=(String)object[i].get("remark");
+        	String month=(String)object[i].get("month");
+          // 	System.out.println(id+ques+ans+remark);
+           	int count=ManagerDataRepository.idcount(id,month);
+           	System.out.println(count);
+           	QuestionandAnswer qq6= new QuestionandAnswer(); 
+          	if(count>5) {id2=ManagerDataRepository.findqid(id,qno,month);
+    		qq6.setQid(id2);}
+    		
+		 	//.qandsdynamic(id,ques,ans,remark);
+        	Timestamp Mil=new Timestamp(System.currentTimeMillis());
+    		int qn=ManagerDataRepository.idcount(id,month);
+    		//qn++;
+    		qq6.setId(id);qq6.setQues(ques);qq6.setAns(ans);qq6.setQno(qno++);qq6.setRemark(remark);qq6.setQtime(Mil);
+    		//if(id2!=0)qq6.setQid(id2);
+              qn++;qq6.setMonth(month);
+           //   System.out.println(qn+""+id);
+              mqanda.save(qq6);
+
+        }
+	}
+}
 
 	
 
 		
-	}
+	
 
 	
 	

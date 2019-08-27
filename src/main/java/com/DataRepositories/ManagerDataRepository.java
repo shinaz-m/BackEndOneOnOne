@@ -20,8 +20,8 @@ public interface ManagerDataRepository extends CrudRepository<month_values, Inte
 	@Query(value="UPDATE month_values  SET ?1 = 1 where id = ?2 ",nativeQuery=true)
 	public void updatemonth(String month, int id);
 
-	@Query(value="Select COUNT(id) from q_and_a WHERE id=?1",nativeQuery=true)
-	public int idcount(int id);
+	@Query(value="Select COUNT(id) from q_and_a WHERE id=?1 and month =?2",nativeQuery=true)
+	public int idcount(int id,String month);
 
 	
 	@Query(value="SELECT g.goal, g.gtime FROM egoal g WHERE id=?1",nativeQuery=true)
@@ -63,5 +63,8 @@ public interface ManagerDataRepository extends CrudRepository<month_values, Inte
 	@Modifying
 	@Query(value="UPDATE  month_values set december=1 where id=?1",nativeQuery=true)
 	public void dec(int id);
-	}
+	
 
+@Query(value="Select qid from q_and_a where id=?1 and qno=?2 and month=?3",nativeQuery=true)
+public int findqid(int id,int qno,String month);
+}

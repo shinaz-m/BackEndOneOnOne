@@ -105,7 +105,8 @@ public class EmployeeDataController {
 	@RequestMapping(path="/viewqanda",method=RequestMethod.POST) 
 	public Iterable<JSONObject> viewqanda(@RequestBody JSONObject idget){
 		int id=(int)idget.get("id");
-		return usd.viewqanda(id);
+		String month=(String)idget.get("month");
+		return usd.viewqanda(id,month);
 	}
 	
 	

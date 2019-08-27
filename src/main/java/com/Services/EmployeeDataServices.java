@@ -143,8 +143,8 @@ public class EmployeeDataServices implements For_employee {
 
 
 
-	public Iterable<JSONObject> viewqanda(int id) {
-		return EmployeeDataRepository.allqanda(id);
+	public Iterable<JSONObject> viewqanda(int id,String month) {
+		return EmployeeDataRepository.allqanda(id,month);
 	}
 
 

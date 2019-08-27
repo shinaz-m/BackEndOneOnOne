@@ -1,6 +1,9 @@
 package com.Controller;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
+
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,9 @@ import com.Services.ManagerDataServices;
 import com.nineleaps.OneonOne.EmployeeData;
 import com.nineleaps.OneonOne.ManHr;
 import com.nineleaps.OneonOne.Mn_create;
+
+//import antlr.collections.List;
+
 import com.nineleaps.OneonOne.Employeegoals;
 
 @Transactional
@@ -23,6 +29,7 @@ import com.nineleaps.OneonOne.Employeegoals;
 public class ManagerDatacontroller {
 	@Autowired
 	private ManagerDataServices mng;
+	
 	@RequestMapping(path="/add_mng",method=RequestMethod.POST) 
 	public Mn_create AddMngVal(@RequestBody Mn_create z) {
 		return mng.man(z);
@@ -47,17 +54,28 @@ public class ManagerDatacontroller {
 	}
 	
 	@RequestMapping(path="/qanda_dynamic",method=RequestMethod.POST) 
-	public void QAns(@RequestBody JSONObject q) 
+	public void QAns(@RequestBody List<JSONObject> q) throws Exception
 	{   
-		int id=(int)q.get("id");
-		String ques=(String)q.get("q");
-		String ans=(String)q.get("a");
-		String remark=(String)q.get("remark");
-		mng.qandsdynamic(id,ques,ans,remark);
+		 try
+		 {int size = q.size();
+	        JSONObject object[] = new JSONObject[size];
+	        System.out.println(size);
+	        for(int i=0;i<size;i++)
+	        {
+	            object[i]=new JSONObject(q.get(i));
+	        }
+	        
+	        mng.qandadynamic(object);
+		 }catch(Exception e) {}
 	}
+
+	
+	//public void startupdate(JSONObject obj[]) {
+	        	
+	
 	
 	@RequestMapping(path="/qanda_static",method=RequestMethod.POST) 
-	public void QAns1(@RequestBody JSONObject qq) 
+	public Iterable<JSONObject> QAns1(@RequestBody JSONObject qq) 
 	{
 		int id=(int)qq.get("id");
 		String q1=(String)qq.get("q1");
@@ -70,7 +88,8 @@ public class ManagerDatacontroller {
 		String a4=(String)qq.get("a4");
 		String q5=(String)qq.get("q5"); 
 		String a5=(String)qq.get("a5");
-		 mng.qandstatic(id,q1,a1,q2,a2,q3,a3,q4,a4,q5,a5);
+		String month=(String)qq.get("month");
+		return mng.qandstatic(id,q1,a1,q2,a2,q3,a3,q4,a4,q5,a5,month);
 	}
 	
 	
@@ -79,7 +98,7 @@ public class ManagerDatacontroller {
 	{
 		int id=(int)g.get("id");
 		String goal=(String)g.get("goal");
-		String gtime=(String)g.get("gtime");
+		String gtime=(String)g.get("deadline");
 	    mng.goal(id,goal,gtime);
 	}
 

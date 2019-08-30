@@ -32,6 +32,8 @@ import com.nineleaps.OneonOne.Mn_create;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import com.nineleaps.OneonOne.Employeegoals;
 
@@ -39,6 +41,13 @@ import com.nineleaps.OneonOne.Employeegoals;
 @RestController
 @CrossOrigin
 @Api(value="Employee Data Controller")
+@ApiResponses(
+        value = {
+                
+                @ApiResponse(code = 200, message = "Successfully Executed"),
+                @ApiResponse(code = 400, message = "Token not found"),
+                @ApiResponse(code = 404, message = "Wrong Api Path")
+})
 public class EmployeeDataController {
 
 	@Autowired

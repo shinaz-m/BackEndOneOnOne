@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.w@Api(value="Employee Data Controller")eb.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.Services.ManagerDataServices;
 import com.nineleaps.OneonOne.EmployeeData;
@@ -21,6 +21,8 @@ import com.nineleaps.OneonOne.Mn_create;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 //import antlr.collections.List;
 
@@ -29,7 +31,13 @@ import com.nineleaps.OneonOne.Employeegoals;
 @Transactional
 @RestController
 @Api(value="Manager Data Controller")
-
+@ApiResponses(
+        value = {
+                
+                @ApiResponse(code = 200, message = "Successfully Executed"),
+                @ApiResponse(code = 400, message = "Token not found"),
+                @ApiResponse(code = 404, message = "Wrong Api Path")
+})
 @CrossOrigin
 
 public class ManagerDatacontroller {

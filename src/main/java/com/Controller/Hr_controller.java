@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 //import com.Services.EmployeeDataServices;
 import com.Services.HRDataServices;
+
+import io.swagger.annotations.ApiOperation;
 @Transactional
 @RestController
 @CrossOrigin
@@ -19,6 +21,8 @@ public class Hr_controller {
 	
 	@Autowired
 	private HRDataServices hrs ;
+	
+	@ApiOperation(value = "To view employee progres based on the criteria")
 	@RequestMapping(path="/hr",method=RequestMethod.POST) 
 	public Iterable<JSONObject> AddMthVal(@RequestBody JSONObject x)
 	{
@@ -29,12 +33,16 @@ public class Hr_controller {
 		//if(id==null)
 		return hrs.view(id,month,progress);	
 		}
+	
+	@ApiOperation(value = "To view the progress of all employees")
 	@RequestMapping(path="/hrviewall",method=RequestMethod.GET)
 	public Iterable<JSONObject> hrviewall()
 	{
 		return hrs.viewall();
 		
 	}
+	
+	@ApiOperation(value = "To view the ids of all employees")
 	@RequestMapping(path="/hremployeeidview",method=RequestMethod.GET)
 	public Iterable<JSONObject> hrempid()
 	{

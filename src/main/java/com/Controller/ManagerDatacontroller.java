@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.w@Api(value="Employee Data Controller")eb.bind.annotation.RestController;
 
 import com.Services.ManagerDataServices;
 import com.nineleaps.OneonOne.EmployeeData;
 import com.nineleaps.OneonOne.ManHr;
 import com.nineleaps.OneonOne.Mn_create;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 //import antlr.collections.List;
 
@@ -24,6 +28,8 @@ import com.nineleaps.OneonOne.Employeegoals;
 
 @Transactional
 @RestController
+@Api(value="Manager Data Controller")
+
 @CrossOrigin
 
 public class ManagerDatacontroller {
@@ -31,12 +37,14 @@ public class ManagerDatacontroller {
 	private ManagerDataServices mng;
 	
 	@RequestMapping(path="/add_mng",method=RequestMethod.POST) 
+	@ApiOperation(value="Priviledge for super user to add manager .")
 	public Mn_create AddMngVal(@RequestBody Mn_create z) {
 		return mng.man(z);
 	}
 	
 	
 	@RequestMapping(path="/emp_progress",method=RequestMethod.POST) 
+	@ApiOperation(value=" display 12 month digital values based on progress of month.")
 	public Iterable<JSONObject> emp_progress(@RequestBody JSONObject id)
 	{
 		//JSONObject j=new JSONObject(id);
@@ -45,6 +53,7 @@ public class ManagerDatacontroller {
 	}
 	
 	@RequestMapping(path="/updatemonthvalue",method=RequestMethod.PATCH)
+	@ApiOperation(value=" upload 12 month digital values based on progress of month.")
 	public Iterable<JSONObject> updatemonth(@RequestBody JSONObject m)
 	{
 		String month=(String)m.get("month");
@@ -53,7 +62,8 @@ public class ManagerDatacontroller {
 		
 	}
 	
-	@RequestMapping(path="/qanda_dynamic",method=RequestMethod.POST) 
+	@RequestMapping(path="/qanda_dynamic",method=RequestMethod.POST)
+	@ApiOperation(value=" Fill dynamic question and answer for a particular id based on question count.")	
 	public void QAns(@RequestBody List<JSONObject> q) throws Exception
 	{   
 		 try
@@ -75,6 +85,7 @@ public class ManagerDatacontroller {
 	
 	
 	@RequestMapping(path="/qanda_static",method=RequestMethod.POST) 
+	@ApiOperation(value=" Fill five static question and answer for a particular id .")
 	public Iterable<JSONObject> QAns1(@RequestBody JSONObject qq) 
 	{
 		int id=(int)qq.get("id");
@@ -94,6 +105,7 @@ public class ManagerDatacontroller {
 	
 	
 	@RequestMapping(path="/add_goals",method=RequestMethod.POST) 
+	@ApiOperation(value=" Fill Goals for a particular id .")
 	public void AddMthVal(@RequestBody List<JSONObject> g)
 	{
 		int size = g.size();

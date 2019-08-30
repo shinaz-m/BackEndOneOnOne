@@ -1,15 +1,22 @@
 package com.DataRepositories;
 
 import javax.transaction.Transactional;
+import javax.transaction.TransactionalException;
 
 import org.json.simple.JSONObject;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.UnexpectedRollbackException;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.nineleaps.OneonOne.Mn_create;
 import com.nineleaps.OneonOne.month_values;
-@Transactional
+
+//@Transactional(rollbackOn  = Exception.class )
+//@EnableTransactionManagement
+//@TransactionConfiguration(defaultRollback = true)
+@Transactional()
 public interface ManagerDataRepository extends CrudRepository<month_values, Integer> {
 
 	
@@ -19,7 +26,7 @@ public interface ManagerDataRepository extends CrudRepository<month_values, Inte
 	@Modifying
 	@Query(value="UPDATE month_values  SET ?1 = 1 where id = ?2 ",nativeQuery=true)
 	public void updatemonth(String month, int id);
-
+	
 	@Query(value="Select COUNT(id) from q_and_a WHERE id=?1 and month =?2",nativeQuery=true)
 	public int idcount(int id,String month);
 
@@ -65,6 +72,20 @@ public interface ManagerDataRepository extends CrudRepository<month_values, Inte
 	public void dec(int id);
 	
 
-@Query(value="Select qid from q_and_a where id=?1 and qno=?2 and month=?3",nativeQuery=true)
-public int findqid(int id,int qno,String month);
+	@Query(value="Select qid from q_and_a where id=?1 and qno=?2 and month=?3",nativeQuery=true)
+	public int findqid(int id,int qno,String month); 
+
+	@Query(value="Select count(qno) from q_and_a where id=?1 and month=?2 and qno=?3",nativeQuery=true)
+	public int exist(int id, String month, int qno);
+
+	@Transactional
+	@Modifying
+	@Query(value="INSERT INTO q_and_a (id,ques,ans,remark,month,qno,qtime,type) VALUES (?1,?2,?3,?4,?5,?6,current_timestamp,'d')",nativeQuery=true)
+	public void createdynamic(int id, String ques, String ans, String remark, String month, int qno);
+
+	@Modifying
+	@Query(value="Update q_and_a set ques=?2, ans=?3, remark=?4  where id=?1 and month=?5 and qno=?6",nativeQuery=true)
+	public void updatedynamic(int id, String ques, String ans, String remark, String month, int qno);
+
+
 }

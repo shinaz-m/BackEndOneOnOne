@@ -57,7 +57,8 @@ public class Employeegoals {
 
 	@Override
 	public String toString() {
-		return "egoal [gid=" + gid + ", id=" + id + ", goal=" + goal + ", gtime=" + gtime + "]";
+		return "Employeegoals [gid=" + gid + ", id=" + id + ", goal=" + goal + ", gtime=" + gtime + "]";
 	}
+
 	
 }

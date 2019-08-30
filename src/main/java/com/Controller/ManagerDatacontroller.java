@@ -59,7 +59,7 @@ public class ManagerDatacontroller {
 		 try
 		 {int size = q.size();
 	        JSONObject object[] = new JSONObject[size];
-	        System.out.println(size);
+	     //   System.out.println(size);
 	        for(int i=0;i<size;i++)
 	        {
 	            object[i]=new JSONObject(q.get(i));
@@ -94,12 +94,16 @@ public class ManagerDatacontroller {
 	
 	
 	@RequestMapping(path="/add_goals",method=RequestMethod.POST) 
-	public void AddMthVal(@RequestBody JSONObject g)
+	public void AddMthVal(@RequestBody List<JSONObject> g)
 	{
-		int id=(int)g.get("id");
-		String goal=(String)g.get("goal");
-		String gtime=(String)g.get("deadline");
-	    mng.goal(id,goal,gtime);
+		int size = g.size();
+        JSONObject object[] = new JSONObject[size];
+        System.out.println(size);
+        for(int i=0;i<size;i++)
+        {
+            object[i]=new JSONObject(g.get(i));
+        }
+	    mng.goal(object);
 	}
 
 

@@ -39,6 +39,9 @@ public class QuestionandAnswer {
 	@Column(name="month")
 	private String month;
 	
+	@Column(name="type")
+	private String type;
+	
 	public String getRemark() {
 		return remark;
 	}
@@ -98,6 +101,16 @@ public class QuestionandAnswer {
 		this.qno = qno;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
 	public java.sql.Timestamp getQtime() {
 		return qtime;
 	}
@@ -110,8 +123,10 @@ public class QuestionandAnswer {
 	@Override
 	public String toString() {
 		return "QuestionandAnswer [qid=" + qid + ", id=" + id + ", ques=" + ques + ", ans=" + ans + ", qno=" + qno
-				+ ", qtime=" + qtime + ", remark=" + remark + ", month=" + month + "]";
+				+ ", qtime=" + qtime + ", remark=" + remark + ", month=" + month + ", type=" + type + "]";
 	}
+
+	
 
 
 

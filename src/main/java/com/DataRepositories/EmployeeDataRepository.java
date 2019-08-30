@@ -11,12 +11,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.UnexpectedRollbackException;
 
 import com.nineleaps.OneonOne.EmployeeData;
 import com.nineleaps.OneonOne.Mn_create;
 import com.nineleaps.OneonOne.Employeegoals;
 //import com.nineleaps.SignUpApi.UserData;
-@Transactional
+@Transactional()
 @Repository
 public interface EmployeeDataRepository  extends CrudRepository<EmployeeData,Integer>{
 
@@ -51,7 +52,7 @@ public interface EmployeeDataRepository  extends CrudRepository<EmployeeData,Int
 	@Query(value="Insert into month_values (id) values(?1)",nativeQuery=true)
 	public void month_valueupdate(int id);
 
-    @Query (value="Select id,qno,ques,ans from q_and_a where id=?1 and month=?2",nativeQuery=true)
+    @Query (value="Select id,qno,ques,ans,remark,type,month from q_and_a where id=?1 and month=?2",nativeQuery=true)
 	public Iterable<JSONObject> allqanda(int id,String month);
 
     @Query(value="SELECT  b.empname FROM EmployeeData b WHERE mid=0")

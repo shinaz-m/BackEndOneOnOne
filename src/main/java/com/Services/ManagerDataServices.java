@@ -1,6 +1,8 @@
 package com.Services;
 
 import java.sql.Date;
+
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -20,21 +22,19 @@ import com.DataRepositories.ManagerDataRepository;
 import com.DataRepositories.ManagerQuestionandAnswerRepository;
 import com.DataRepositories.EmployeeDataRepository;
 import com.DataRepositories.EmployeegoalsRepository;
-import com.Interface.For_mng;
 import com.nineleaps.OneonOne.EmployeeData;
-import com.nineleaps.OneonOne.Mn_create;
 import com.nineleaps.OneonOne.QuestionandAnswer;
 import com.nineleaps.OneonOne.Employeegoals;
 import com.nineleaps.OneonOne.month_values;
 
 @Transactional()
 @Service
-public class ManagerDataServices implements For_mng{
-	@Autowired
-	private com.DataRepositories.Addmng Addmng;
+public class ManagerDataServices{
 	
 	@Autowired
 	public ManagerDataRepository ManagerDataRepository;
+	@Autowired
+	public EmployeeDataRepository EmployeeDataRepository;
 	@Autowired
 	private ManagerQuestionandAnswerRepository mqanda;
 	@Autowired
@@ -52,9 +52,7 @@ public class ManagerDataServices implements For_mng{
 	Employeegoals gg=new Employeegoals();
 	
 	public month_values mv=new month_values();
-	public Mn_create man(Mn_create z) {
-		 return Addmng.save(z);
-	 }
+	
 	
 	public Iterable<JSONObject> emp_prog(int id) {
 		
@@ -89,7 +87,6 @@ public class ManagerDataServices implements For_mng{
 			else if(month.equals("december"))
 			ManagerDataRepository.dec(id);
 	
-		//if(ManagerDataRepository.idcount(id)>0)
 		
 		return er.allqanda(id,month);	
 		}
@@ -120,32 +117,40 @@ public class ManagerDataServices implements For_mng{
 	}
 
 	
-	public void goal(JSONObject[] g) {
+	public void goal(JSONObject[] g, int id, String month) {
 		
+		int gno=1;
 		for(int i=0;i<g.length;i++)
         {
 			int gid=gg.getGid();
-			int id=(int)g[i].get("id");
 			String goal=(String)g[i].get("goal");
 			String gtime=(String)g[i].get("deadline");
-     		gg.setId(id);gg.setGoal(goal);gg.setGtime(gtime);gg.setGid(++gid);
+			
+			int existgoal=ManagerDataRepository.existgoal(id,month,gno);
+						
+			if(existgoal==0)
+			{
+				
+     		gg.setId(id);gg.setGoal(goal);gg.setGtime(gtime);gg.setGid(++gid);gg.setMonth(month);gg.setGno(gno);
      		emprepo.save(gg);
-	}}
+			}
+			else if(existgoal==1)
+			{
+				ManagerDataRepository.updategoal(id,goal,gtime,month,gno);
+			}
+			gno++;
+	}
+		}
 
-	public void qandadynamic(JSONObject[] object) {
-	//	System.out.println("hello");
-	//	int id2;
+	public void qandadynamic(JSONObject[] object,int id, String month) {
 		int qno=6;
-		//System.out.println(qq5.getQid());
 			for(int i=0;i<object.length;i++)
         {
 			System.out.println(i);
-        	int id=(int)object[i].get("id");
         	String ques=(String)object[i].get("ques");
         	String ans=(String)object[i].get("ans");
         	String remark=(String)object[i].get("remark");
-        	String month=(String)object[i].get("month");
-
+        	
         	try {
         	int exist=ManagerDataRepository.exist(id,month,qno);
         	System.out.println(exist);
@@ -159,8 +164,7 @@ public class ManagerDataServices implements For_mng{
            		qq6.setId(id);qq6.setQues(ques);qq6.setAns(ans);qq6.setQno(qno);qq6.setRemark(remark);
            		qq6.setQtime(Mil);qq6.setMonth(month);qq6.setType("d");
                 mqanda.save(qq6);
-        		//qno++;
-        	}
+            	}
            	else if(exist==1)
         	{
             		System.out.println("old");
@@ -171,25 +175,28 @@ public class ManagerDataServices implements For_mng{
         	catch(Exception e)
         	{
         		System.out.println(e);
+        		} 	
         	}
-//       	int count=ManagerDataRepository.idcount(id,month);
-//       	System.out.println(count);
-//       	QuestionandAnswer qq6= new QuestionandAnswer(); 
-//    	Timestamp Mil=new Timestamp(System.currentTimeMillis());
-//    	  if(count>5) 
-//      	{
-//      		id2=ManagerDataRepository.findqid(id,qno,month);
-//      		System.out.println(id2);
-//      		qq6.setQid(id2);}
-//    	
-//		//int qn=ManagerDataRepository.idcount(id,month);
-//		qq6.setId(id);qq6.setQues(ques);qq6.setAns(ans);qq6.setQno(qno++);qq6.setRemark(remark);
-//		qq6.setQtime(Mil);qq6.setMonth(month);qq6.setType("d");
-//        mqanda.save(qq6);
-//
-    	        	
-        }
 	}
+	
+	 public Iterable<JSONObject> listemps(int l){
+			// System.out.println(l);
+			 return EmployeeDataRepository.mng_list(l);
+			    	 }
+		
+	 public void addMem(EmployeeData m)
+		{
+		 EmployeeDataRepository.AddMem(m.getEmail(),m.getId());
+		}
+		
+		 
+		
+		public void DropMem(EmployeeData d)
+		{
+	    EmployeeDataRepository.dropMem(d.getEmpname());
+		}
+		 
+	
 }
 
 

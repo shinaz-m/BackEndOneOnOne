@@ -22,6 +22,12 @@ public class Employeegoals {
     
 	@Column(name= "gtime",columnDefinition="varchar(500)")
 	private String gtime;
+	
+	@Column(name="month")
+	private String month;
+	
+	@Column(name="gno")
+	private int gno;
 
 	public int getGid() {
 		return gid;
@@ -55,10 +61,34 @@ public class Employeegoals {
 		this.gtime = gtime;
 	}
 
+	
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public int getGno() {
+		return gno;
+	}
+
+	public void setGno(int gno) {
+		this.gno = gno;
+	}
+
 	@Override
 	public String toString() {
-		return "Employeegoals [gid=" + gid + ", id=" + id + ", goal=" + goal + ", gtime=" + gtime + "]";
+		return "Employeegoals [gid=" + gid + ", id=" + id + ", goal=" + goal + ", gtime=" + gtime + ", month=" + month
+				+ ", gno=" + gno + "]";
 	}
+
+	
+	
+ 
+
+	
 
 	
 }

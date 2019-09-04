@@ -1,6 +1,7 @@
 package com.DataRepositories;
 
 import javax.transaction.Transactional;
+
 import javax.transaction.TransactionalException;
 
 import org.json.simple.JSONObject;
@@ -10,7 +11,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.nineleaps.OneonOne.Mn_create;
 import com.nineleaps.OneonOne.month_values;
 
 //@Transactional(rollbackOn  = Exception.class )
@@ -31,8 +31,8 @@ public interface ManagerDataRepository extends CrudRepository<month_values, Inte
 	public int idcount(int id,String month);
 
 	
-	@Query(value="SELECT g.goal, g.gtime FROM egoal g WHERE id=?1",nativeQuery=true)
-	 public Iterable<JSONObject> goallist(int g);
+	@Query(value="SELECT g.goal, g.gtime, g.gno FROM egoal g WHERE id=?1 and month=?2",nativeQuery=true)
+	 public Iterable<JSONObject> goallist(int g, String month);
 
 	@Modifying
 	@Query(value="UPDATE month_values set jan=1 where id=?1",nativeQuery=true)
@@ -86,6 +86,14 @@ public interface ManagerDataRepository extends CrudRepository<month_values, Inte
 	@Modifying
 	@Query(value="Update q_and_a set ques=?2, ans=?3, remark=?4  where id=?1 and month=?5 and qno=?6",nativeQuery=true)
 	public void updatedynamic(int id, String ques, String ans, String remark, String month, int qno);
+
+	@Query(value="Select count(gno) from egoal where id=?1 and month=?2 and gno=?3",nativeQuery=true)
+	public int existgoal(int id, String month, int gno);
+
+	
+	@Modifying
+	@Query(value="update egoal set goal=?2, gtime=?3 where id=?1 and month =?4 and gno=?5",nativeQuery = true)
+	public void updategoal(int id, String goal, String gtime, String month, int gno);
 
 
 }

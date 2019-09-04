@@ -2,15 +2,14 @@ package com.Services;
 
 import java.util.Optional;
 
+
+
 import com.Controller.*;
 import com.DataRepositories.*;
-import com.Interface.For_employee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nineleaps.OneonOne.EmployeeData;
 //import com.nineleaps.SignUpApi.UserData;
 //import com.nineleaps.SignUpApi.ProjectIdAndName;
-import com.nineleaps.OneonOne.Mn_create;
-import com.nineleaps.OneonOne.Employeegoals;
 import com.nineleaps.OneonOne.month_values;
 
 import java.util.regex.Matcher;
@@ -32,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 @Transactional
 @Service
-public class EmployeeDataServices implements For_employee {
+public class EmployeeDataServices {
 //class UserDataServices implements ProjectIdAndName{	
 	private static final String number="(^$|[0-9]{10})";
 	private Pattern pattern;
@@ -78,18 +77,7 @@ public class EmployeeDataServices implements For_employee {
 	
 	 
 	 
-	public void addMem(EmployeeData m)
-	{
-	 EmployeeDataRepository.AddMem(m.getEmail(),m.getId());
-	}
 	
-	 
-	
-	public void DropMem(EmployeeData d)
-	{
-    EmployeeDataRepository.dropMem(d.getEmpname());
-	}
-	 
 	
 	
 	 
@@ -149,10 +137,10 @@ public class EmployeeDataServices implements For_employee {
 
 
 
-	public Iterable<JSONObject> viewgoal(int g) {
+	public Iterable<JSONObject> viewgoal(int g, String month) {
 		// TODO Auto-generated method stub
 		
-			 return mr.goallist(g);
+			 return mr.goallist(g,month);
 		 }
 	}
 

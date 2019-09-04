@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"com.Controller","com.Services"})
+@ComponentScan({"com.Controller","com.Services","com.swaggerconfig"})
 @EnableJpaRepositories("com.DataRepositories")
 public class OneonOne {
 

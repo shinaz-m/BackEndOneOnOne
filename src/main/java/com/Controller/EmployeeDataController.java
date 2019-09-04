@@ -1,6 +1,7 @@
 package com.Controller;
  
 import java.util.Optional;
+
 import com.DataRepositories.*;
 import com.Services.*;
 import com.nineleaps.*;
@@ -13,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 //import org.springframework.web.bind.annotation.PostMapping;
 //import javax.ws.rs.core.Response;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,9 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Services.EmployeeDataServices;
 import com.nineleaps.OneonOne.EmployeeData;
-import com.nineleaps.OneonOne.ManHr;
 //import com.nineleaps.SignUpApi.UserData;
-import com.nineleaps.OneonOne.Mn_create;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -59,13 +59,6 @@ public class EmployeeDataController {
 		return usd.allemps();
 	}
 	
-	@ApiOperation(value = "To Display reportees under a particular manager")
-	@RequestMapping(path="/mng_list",method=RequestMethod.POST) 
-	public Iterable<JSONObject> findEmpos(@RequestBody EmployeeData l)
-	{
-		return usd.listemps(l.getMid());
-	}
-	
 	@ApiOperation(value = "TO Register a new employee to database")
 	@RequestMapping(path="/employee",method=RequestMethod.POST) 
 	public String AddNewUser(@RequestBody EmployeeData u)
@@ -73,20 +66,7 @@ public class EmployeeDataController {
 		return usd.add(u);
 	}
 	
-	@ApiOperation(value = "To add a reportee under manager id")
-	@RequestMapping(path="/addformng",method=RequestMethod.PATCH) 
-	public void AddNewMem(@RequestBody EmployeeData m)
-	{
-		usd.addMem(m);
-	}
-	
-	@ApiOperation(value = "To delete a reportee for a particular manager")
-	@RequestMapping(path="/dropformng",method=RequestMethod.PATCH) 
-	public void DelOneMem(@RequestBody EmployeeData d)
-	{
-		usd.DropMem(d);
-	}
-	
+		
 	@ApiOperation(value = "To display all the un-assigned employees so that the manager could could add him")
 	@RequestMapping(path="/mngdroplist",method=RequestMethod.GET) 
 	public Iterable<EmployeeData> findmlist ()
@@ -95,10 +75,10 @@ public class EmployeeDataController {
 	}
 	
 	@ApiOperation(value = "To view goals for a particular employee")
-	@RequestMapping(path="/viewgoal",method=RequestMethod.POST) 
-	public Iterable<JSONObject> goallist(@RequestBody Employeegoals g )
+	@RequestMapping(path="/viewgoal/{id}/{month}",method=RequestMethod.GET) 
+	public Iterable<JSONObject> goallist(@PathVariable(value="id")int id,@PathVariable(value = "month")String month)
 	{
-		return usd.viewgoal(g.getId());
+		return usd.viewgoal(id,month);
 	}
 
 	
@@ -108,7 +88,7 @@ public class EmployeeDataController {
 		//JSONObject j=new JSONObject(user);
 		String email=(String)user.get("email");
 		String password=(String)user.get("password");
-		return usd.authenticate(email,password);
+		return usd.authenticate(email.trim(),password);
 		
 	}
 	

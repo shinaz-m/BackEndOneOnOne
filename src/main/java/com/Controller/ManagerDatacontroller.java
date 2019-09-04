@@ -8,17 +8,14 @@ import javax.transaction.Transactional;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.w@Api(value="Employee Data Controller")eb.bind.annotation.RestController;
-
+   
 import com.Services.ManagerDataServices;
 import com.nineleaps.OneonOne.EmployeeData;
-import com.nineleaps.OneonOne.ManHr;
-import com.nineleaps.OneonOne.Mn_create;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -36,12 +33,6 @@ public class ManagerDatacontroller {
 	@Autowired
 	private ManagerDataServices mng;
 	
-	@RequestMapping(path="/add_mng",method=RequestMethod.POST) 
-	@ApiOperation(value="Priviledge for super user to add manager .")
-	public Mn_create AddMngVal(@RequestBody Mn_create z) {
-		return mng.man(z);
-	}
-	
 	
 	@RequestMapping(path="/emp_progress",method=RequestMethod.POST) 
 	@ApiOperation(value=" display 12 month digital values based on progress of month.")
@@ -52,19 +43,17 @@ public class ManagerDatacontroller {
 		return mng.emp_prog(eid);
 	}
 	
-	@RequestMapping(path="/updatemonthvalue",method=RequestMethod.PATCH)
+	@RequestMapping(path="/updatemonthvalue/{id}/{month}",method=RequestMethod.POST)
 	@ApiOperation(value=" upload 12 month digital values based on progress of month.")
-	public Iterable<JSONObject> updatemonth(@RequestBody JSONObject m)
+	public Iterable<JSONObject> updatemonth(@PathVariable (value="id") int id,@PathVariable(value="month")String month)
 	{
-		String month=(String)m.get("month");
-		int id=(int)m.get("id");
- 		return mng.updatemonth(month,id);
+		return mng.updatemonth(month,id);
 		
 	}
 	
-	@RequestMapping(path="/qanda_dynamic",method=RequestMethod.POST)
+	@RequestMapping(path="/qanda_dynamic/{id}/{month}",method=RequestMethod.POST)
 	@ApiOperation(value=" Fill dynamic question and answer for a particular id based on question count.")	
-	public void QAns(@RequestBody List<JSONObject> q) throws Exception
+	public void QAns(@RequestBody List<JSONObject> q,@PathVariable (value="id") int id,@PathVariable(value="month")String month) throws Exception
 	{   
 		 try
 		 {int size = q.size();
@@ -75,7 +64,7 @@ public class ManagerDatacontroller {
 	            object[i]=new JSONObject(q.get(i));
 	        }
 	        
-	        mng.qandadynamic(object);
+	        mng.qandadynamic(object,id,month);
 		 }catch(Exception e) {}
 	}
 
@@ -84,11 +73,10 @@ public class ManagerDatacontroller {
 	        	
 	
 	
-	@RequestMapping(path="/qanda_static",method=RequestMethod.POST) 
+	@RequestMapping(path="/qanda_static/{id}/{month}",method=RequestMethod.POST) 
 	@ApiOperation(value=" Fill five static question and answer for a particular id .")
-	public Iterable<JSONObject> QAns1(@RequestBody JSONObject qq) 
+	public Iterable<JSONObject> QAns1(@RequestBody JSONObject qq,@PathVariable (value="id") int id,@PathVariable(value="month")String month) 
 	{
-		int id=(int)qq.get("id");
 		String q1=(String)qq.get("q1");
 		String a1=(String)qq.get("a1");
 		String q2=(String)qq.get("q2");
@@ -99,14 +87,13 @@ public class ManagerDatacontroller {
 		String a4=(String)qq.get("a4");
 		String q5=(String)qq.get("q5"); 
 		String a5=(String)qq.get("a5");
-		String month=(String)qq.get("month");
 		return mng.qandstatic(id,q1,a1,q2,a2,q3,a3,q4,a4,q5,a5,month);
 	}
 	
 	
-	@RequestMapping(path="/add_goals",method=RequestMethod.POST) 
+	@RequestMapping(path="/addgoals/{id}/{month}",method=RequestMethod.POST) 
 	@ApiOperation(value=" Fill Goals for a particular id .")
-	public void AddMthVal(@RequestBody List<JSONObject> g)
+	public void AddMthVal(@RequestBody List<JSONObject> g,@PathVariable (value="id") int id,@PathVariable(value="month")String month)
 	{
 		int size = g.size();
         JSONObject object[] = new JSONObject[size];
@@ -115,9 +102,30 @@ public class ManagerDatacontroller {
         {
             object[i]=new JSONObject(g.get(i));
         }
-	    mng.goal(object);
+	    mng.goal(object,id,month);
 	}
 
+	@ApiOperation(value = "To Display reportees under a particular manager")
+	@RequestMapping(path="/mng_list/{id}",method=RequestMethod.GET) 
+	public Iterable<JSONObject> findEmpos(@PathVariable (value="id") int id)
+	{
+		return mng.listemps(id);
+	}
+	
+	@ApiOperation(value = "To add a reportee under manager id")
+	@RequestMapping(path="/addformng",method=RequestMethod.PATCH) 
+	public void AddNewMem(@RequestBody EmployeeData m)
+	{
+		mng.addMem(m);
+	}
+	
+	@ApiOperation(value = "To delete a reportee for a particular manager")
+	@RequestMapping(path="/dropformng",method=RequestMethod.PATCH) 
+	public void DelOneMem(@RequestBody EmployeeData d)
+	{
+		mng.DropMem(d);
+	}
+	
 
 
 

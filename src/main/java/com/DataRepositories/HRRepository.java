@@ -2,13 +2,13 @@ package com.DataRepositories;
 
 import javax.transaction.Transactional;
 
+
 import org.json.simple.JSONObject;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 //import com.nineleaps.OneonOne.EmployeeData;
-import com.nineleaps.OneonOne.ManHr;
 import com.nineleaps.OneonOne.month_values;
 @Transactional
 @Repository
@@ -41,6 +41,10 @@ public interface HRRepository extends CrudRepository<month_values,Integer>{
 
 	@Query(value="select t.mon,t.id as id,val as progress,a.empname from (select id, apr as val, 'apr' as mon from month_values    union all    select id, jan, 'jan'    from month_values    union all    select id, feb, 'feb'    from month_values    union all    select id, mar, 'mar'    from month_values    union all    select id, oct, 'oct'    from month_values    union all    select id, may, 'may'    from month_values    union all    select id, june, 'june'    from month_values    union all    select id, july, 'july'    from month_values    union all    select id, aug, 'aug'    from month_values    union all    select id, sep, 'sep'    from month_values    union all    select id, nov, 'nov'    from month_values    union all     select id, december, 'december'    from month_values ) t, emp_data a where a.id=t.id and t.id=?1 and t.val=?2 and t.mon=?3 order by id,FIELD(mon,'jan','feb','mar','apr','may','june','july','aug','sep','oct','nov','december')" ,nativeQuery=true)
 	public Iterable<JSONObject> id_progress_month(String id, String progress, String month);
+
+	
+	@Query(value = "select now()>(qtime + INTERVAL '36' HOUR) as time from q_and_a where id=?1 and month=?2 and qno=1",nativeQuery=true)
+	public JSONObject employeetimestamp(String id, String month);
 
 	
 }

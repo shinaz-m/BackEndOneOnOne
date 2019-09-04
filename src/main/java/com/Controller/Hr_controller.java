@@ -5,6 +5,7 @@ import javax.transaction.Transactional;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,5 +48,12 @@ public class Hr_controller {
 	public Iterable<JSONObject> hrempid()
 	{
 		return hrs.viewempid();
+	}
+	
+	@ApiOperation(value = "To pass the timestamp of a user")
+	@RequestMapping(path="/employeetimestamp/{id}/{month}",method=RequestMethod.GET)
+	public JSONObject employeetimestamp(@PathVariable(value="id")String id,@PathVariable(value="month")String month)
+	{
+		return hrs.employetimestamp(id, month);
 	}
 }

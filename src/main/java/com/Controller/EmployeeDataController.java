@@ -32,6 +32,8 @@ import com.nineleaps.OneonOne.EmployeeData;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 import com.nineleaps.OneonOne.Employeegoals;
 
@@ -39,6 +41,13 @@ import com.nineleaps.OneonOne.Employeegoals;
 @RestController
 @CrossOrigin
 @Api(value="Employee Data Controller")
+@ApiResponses(
+        value = {
+                
+                @ApiResponse(code = 200, message = "Successfully Executed"),
+                @ApiResponse(code = 400, message = "Token not found"),
+                @ApiResponse(code = 404, message = "Wrong Api Path")
+        		})
 public class EmployeeDataController {
 
 	@Autowired
@@ -69,7 +78,7 @@ public class EmployeeDataController {
 		
 	@ApiOperation(value = "To display all the un-assigned employees so that the manager could could add him")
 	@RequestMapping(path="/mngdroplist",method=RequestMethod.GET) 
-	public Iterable<EmployeeData> findmlist ()
+	public Iterable<JSONObject> findmlist ()
 	{
 		return usd.droplist();
 	}
@@ -89,7 +98,6 @@ public class EmployeeDataController {
 		String email=(String)user.get("email");
 		String password=(String)user.get("password");
 		return usd.authenticate(email.trim(),password);
-		
 	}
 	
 	@ApiOperation(value = "To view all the feedback of employee")
@@ -100,6 +108,10 @@ public class EmployeeDataController {
 		return usd.viewqanda(id,month);
 	}
 	
-	
+	@RequestMapping(path="/profile/{id}",method=RequestMethod.GET)
+	public JSONObject profile(@PathVariable(value="id")int id)
+	{
+	return usd.profile(id);
+	}
 	
 }

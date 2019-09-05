@@ -2,6 +2,7 @@ package com.Controller;
 
 import java.util.List;
 
+
 import javax.transaction.Transactional;
 
 
@@ -13,20 +14,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-   
+
 import com.Services.ManagerDataServices;
-import com.nineleaps.OneonOne.EmployeeData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 //import antlr.collections.List;
 
-import com.nineleaps.OneonOne.Employeegoals;
 
 @Transactional
 @RestController
 @Api(value="Manager Data Controller")
-
+@ApiResponses(
+        value = {
+                
+                @ApiResponse(code = 200, message = "Successfully Executed"),
+                @ApiResponse(code = 400, message = "Token not found"),
+                @ApiResponse(code = 404, message = "Wrong Api Path")
+})
 @CrossOrigin
 
 public class ManagerDatacontroller {
@@ -51,29 +58,25 @@ public class ManagerDatacontroller {
 		
 	}
 	
-	@RequestMapping(path="/qanda_dynamic/{id}/{month}",method=RequestMethod.POST)
+	@RequestMapping(path="/qanda_dynamic/{id}/{month}",method=RequestMethod.PATCH)
 	@ApiOperation(value=" Fill dynamic question and answer for a particular id based on question count.")	
 	public void QAns(@RequestBody List<JSONObject> q,@PathVariable (value="id") int id,@PathVariable(value="month")String month) throws Exception
 	{   
 		 try
 		 {int size = q.size();
 	        JSONObject object[] = new JSONObject[size];
-	     //   System.out.println(size);
 	        for(int i=0;i<size;i++)
 	        {
 	            object[i]=new JSONObject(q.get(i));
 	        }
-	        
 	        mng.qandadynamic(object,id,month);
 		 }catch(Exception e) {}
 	}
 
 	
-	//public void startupdate(JSONObject obj[]) {
-	        	
 	
 	
-	@RequestMapping(path="/qanda_static/{id}/{month}",method=RequestMethod.POST) 
+	@RequestMapping(path="/qanda_static/{id}/{month}",method=RequestMethod.PATCH) 
 	@ApiOperation(value=" Fill five static question and answer for a particular id .")
 	public Iterable<JSONObject> QAns1(@RequestBody JSONObject qq,@PathVariable (value="id") int id,@PathVariable(value="month")String month) 
 	{
@@ -93,7 +96,7 @@ public class ManagerDatacontroller {
 	
 	@RequestMapping(path="/addgoals/{id}/{month}",method=RequestMethod.POST) 
 	@ApiOperation(value=" Fill Goals for a particular id .")
-	public void AddMthVal(@RequestBody List<JSONObject> g,@PathVariable (value="id") int id,@PathVariable(value="month")String month)
+	public String addgoal(@RequestBody List<JSONObject> g,@PathVariable (value="id") int id,@PathVariable(value="month")String month)
 	{
 		int size = g.size();
         JSONObject object[] = new JSONObject[size];
@@ -103,6 +106,7 @@ public class ManagerDatacontroller {
             object[i]=new JSONObject(g.get(i));
         }
 	    mng.goal(object,id,month);
+	    return("Goal added  succesfully");
 	}
 
 	@ApiOperation(value = "To Display reportees under a particular manager")
@@ -113,17 +117,19 @@ public class ManagerDatacontroller {
 	}
 	
 	@ApiOperation(value = "To add a reportee under manager id")
-	@RequestMapping(path="/addformng",method=RequestMethod.PATCH) 
-	public void AddNewMem(@RequestBody EmployeeData m)
+	@RequestMapping(path="/addformng/{mid}/{id}",method=RequestMethod.PATCH) 
+	public Iterable<JSONObject> AddNewMem(@PathVariable (value="mid") int mid,@PathVariable (value="id") int id)
 	{
-		mng.addMem(m);
+		mng.addMem(mid,id);
+		return mng.listemps(mid);
 	}
 	
 	@ApiOperation(value = "To delete a reportee for a particular manager")
-	@RequestMapping(path="/dropformng",method=RequestMethod.PATCH) 
-	public void DelOneMem(@RequestBody EmployeeData d)
+	@RequestMapping(path="/dropformng/{mid}/{id}",method=RequestMethod.PATCH) 
+	public Iterable<JSONObject> DelOneMem(@PathVariable (value="mid") int mid,@PathVariable (value="id") int id)
 	{
-		mng.DropMem(d);
+		mng.DropMem(id);
+		return mng.listemps(mid);
 	}
 	
 

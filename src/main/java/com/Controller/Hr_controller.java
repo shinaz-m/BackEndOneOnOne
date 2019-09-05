@@ -14,9 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 //import com.Services.EmployeeDataServices;
 import com.Services.HRDataServices;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 @Transactional
 @RestController
+@Api(value="HR Data Controller")
+@ApiResponses(
+        value = {
+                
+                @ApiResponse(code = 200, message = "Successfully Executed"),
+                @ApiResponse(code = 400, message = "Token not found"),
+                @ApiResponse(code = 404, message = "Wrong Api Path")
+})
 @CrossOrigin
 public class Hr_controller {
 	
@@ -56,4 +67,5 @@ public class Hr_controller {
 	{
 		return hrs.employetimestamp(id, month);
 	}
+	
 }

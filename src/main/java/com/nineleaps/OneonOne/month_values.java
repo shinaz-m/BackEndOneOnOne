@@ -13,11 +13,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="month_values")
 public class month_values {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-//	private int no;
-//	
-	//@ManyToOne(fetch=FetchType.LAZY)
 	@Id
 	@Column(name="id")
 	private int id;
@@ -57,16 +52,6 @@ public class month_values {
 
 	@Column(name="december", columnDefinition="int(11) default '0'")
 	private int december;
-
-//	@Column(name="value")
-//	private String value; 
-//	public int getNo() {
-//		return no;
-//	}
-//
-//	public void setNo(int no) {
-//		this.no = no;
-//	}
 
 	public int getId() {
 		return id;
@@ -171,15 +156,6 @@ public class month_values {
 	public void setDecember(int december) {
 		this.december = december;
 	}
-
-//	public String getValue() {
-//		return value;
-//	}
-//
-//	public void setValue(String value) {
-//		this.value = value;
-//	}
-
 
 
 }

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="egoal")
+@Table(name="employee_goals")
 public class Employeegoals {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,14 +20,14 @@ public class Employeegoals {
 	@Column(name= "goal",columnDefinition="varchar(500)")
 	private String goal;
     
-	@Column(name= "gtime",columnDefinition="varchar(500)")
-	private String gtime;
+	@Column(name= "goaltime",columnDefinition="varchar(500)")
+	private String goaltime;
 	
 	@Column(name="month")
 	private String month;
 	
-	@Column(name="gno")
-	private int gno;
+	@Column(name="goalno")
+	private int goalno;
 
 	public int getGid() {
 		return gid;
@@ -53,14 +53,7 @@ public class Employeegoals {
 		this.goal = goal;
 	}
 
-	public String getGtime() {
-		return gtime;
-	}
-
-	public void setGtime(String gtime) {
-		this.gtime = gtime;
-	}
-
+	
 	
 	public String getMonth() {
 		return month;
@@ -70,21 +63,28 @@ public class Employeegoals {
 		this.month = month;
 	}
 
-	public int getGno() {
-		return gno;
+	public String getGoaltime() {
+		return goaltime;
 	}
 
-	public void setGno(int gno) {
-		this.gno = gno;
+	public void setGoaltime(String goaltime) {
+		this.goaltime = goaltime;
+	}
+
+	public int getGoalno() {
+		return goalno;
+	}
+
+	public void setGoalno(int goalno) {
+		this.goalno = goalno;
 	}
 
 	@Override
 	public String toString() {
-		return "Employeegoals [gid=" + gid + ", id=" + id + ", goal=" + goal + ", gtime=" + gtime + ", month=" + month
-				+ ", gno=" + gno + "]";
+		return "Employeegoals [gid=" + gid + ", id=" + id + ", goal=" + goal + ", goaltime=" + goaltime + ", month="
+				+ month + ", goalno=" + goalno + "]";
 	}
 
-	
 	
  
 

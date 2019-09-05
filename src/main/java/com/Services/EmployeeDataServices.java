@@ -37,25 +37,20 @@ public class EmployeeDataServices {
 	private Pattern pattern;
 	private Matcher matcher;
 	
-	 ObjectMapper Obj = new ObjectMapper(); 
-	//EmployeeDataServices Iterable<a>=new EmployeeDataServices();
-	
+	ObjectMapper Obj = new ObjectMapper(); 
 	String s,s1,e; 
 	@Autowired
 	private EmployeeDataRepository EmployeeDataRepository;
-	//private empgoalsRepository emprepo;
 	@Autowired
 	private ManagerDataRepository mr;
 	public month_values mv=new month_values();
 	PasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	
-	
 	public Iterable<EmployeeData> allusers()
 	{
 		return  EmployeeDataRepository.findAll();
 	}
-	
 	
 	
 	 public Iterable<JSONObject>  allemps(){
@@ -65,20 +60,13 @@ public class EmployeeDataServices {
 	
 	 
 	 public Iterable<JSONObject> listemps(int l){
-		// System.out.println(l);
 		 return EmployeeDataRepository.mng_list(l);
 		    	 }
-	
 	 
 	 
-	 public Iterable<EmployeeData> droplist(){
+	 public Iterable<JSONObject> droplist(){
 		 return EmployeeDataRepository.drplist();
 	 }
-	
-	 
-	 
-	
-	
 	
 	 
 	public String add(EmployeeData u)
@@ -86,7 +74,6 @@ public class EmployeeDataServices {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		pattern = Pattern.compile(number);
 		matcher = pattern.matcher(String.valueOf(u.getPhone()));
-	//	boolean pass=matcher.matches();
 		String existing = EmployeeDataRepository.findByEmail(u.getEmail());
 		String encoded_pass = encoder.encode(u.getPassword());
 		boolean password_match = matcher.matches();
@@ -138,11 +125,16 @@ public class EmployeeDataServices {
 
 
 	public Iterable<JSONObject> viewgoal(int g, String month) {
-		// TODO Auto-generated method stub
-		
 			 return mr.goallist(g,month);
 		 }
+
+
+
+	public JSONObject profile(int id) {
+		return EmployeeDataRepository.empprofile(id);
 	}
+
+}
 
 	
 

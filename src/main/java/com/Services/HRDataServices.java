@@ -16,16 +16,9 @@ public class HRDataServices {
 	
 	@Autowired
 	private HRRepository hrrepo;
-	
-//	
-//	 public ManHr val(ManHr x) {
-//		 return MnthStatus.save(x);
-//	 }
 
 
 	public Iterable<JSONObject> view(String id, String month, String progress) {
-		// TODO Auto-generated method stub
-		
 		System.out.println(id+"     "+month+"    "+progress);
 		if((id==null||id.equals("null")) && (month==null||month.equals("null")) && (progress==null||progress.equals("null")))
 			return hrrepo.viewall();
@@ -45,8 +38,7 @@ public class HRDataServices {
 			return hrrepo.id_progress_month(id,progress,month);
 		else if((id==null||id.equals("null")) && (month==null||month.equals("null")) && (progress==null||progress.equals("null")))
 						return hrrepo.viewall();
-		else 
-			return hrrepo.viewall();
+		else return hrrepo.viewall();
 			
 	}
 

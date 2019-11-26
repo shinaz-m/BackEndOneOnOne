@@ -33,7 +33,7 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 mvn spring-boot:run
 
 **Folder Structure**
-// prettier-ignore
+<!-- prettier-ignore-start -->
 .
 ├── BackEndOneOnOne.iml
 ├── mvnw
@@ -138,4 +138,4 @@ mvn spring-boot:run
 │                   └── SignUpApiApplicationTests.class
 ├── test
 └── tree
-
+<!-- prettier-ignore-end -->

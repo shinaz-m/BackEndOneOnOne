@@ -31,3 +31,156 @@ There are several ways to run a Spring Boot application on your local machine. O
 Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
 
 mvn spring-boot:run
+
+**Folder Structure**
+.
+├── BackEndOneOnOne.iml
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── README.md
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   └── com
+│   │   │       └── nineleaps
+│   │   │           ├── constants
+│   │   │           │   └── Constant.java
+│   │   │           ├── controller
+│   │   │           │   ├── EmployeeDataController.java
+│   │   │           │   ├── FeedbackController.java
+│   │   │           │   ├── HrDataController.java
+│   │   │           │   ├── LoginController.java
+│   │   │           │   ├── ManagerDataController.java
+│   │   │           │   └── SuperHrDataController.java
+│   │   │           ├── datarepositories
+│   │   │           │   ├── EmployeeDataRepository.java
+│   │   │           │   ├── EmployeeGoalRepository.java
+│   │   │           │   ├── EmployeeReportRepository.java
+│   │   │           │   ├── HRDataRepository.java
+│   │   │           │   ├── ManagerDataRepository.java
+│   │   │           │   ├── ManagerDetailsRepository.java
+│   │   │           │   └── QuestionAndAnswer.java
+│   │   │           ├── exception
+│   │   │           │   ├── RoleException.java
+│   │   │           │   └── TokenException.java
+│   │   │           ├── interceptor
+│   │   │           │   ├── EmployeeInterceptor.java
+│   │   │           │   ├── HrInterceptor.java
+│   │   │           │   ├── Interceptor.java
+│   │   │           │   ├── ManagerInterceptor.java
+│   │   │           │   ├── SuperHrInterceptor.java
+│   │   │           │   └── TokenInterceptor.java
+│   │   │           ├── oneonone
+│   │   │           │   ├── EmployeeData.java
+│   │   │           │   ├── Employeegoals.java
+│   │   │           │   ├── EmployeeReport.java
+│   │   │           │   ├── ManagerDetails.java
+│   │   │           │   ├── OneonOne.java
+│   │   │           │   └── QuestionandAnswer.java
+│   │   │           ├── services
+│   │   │           │   ├── EmployeeDataServices.java
+│   │   │           │   ├── HRDataServices.java
+│   │   │           │   ├── InterceptorServices.java
+│   │   │           │   ├── ManagerDataServices.java
+│   │   │           │   └── TokenDataServices.java
+│   │   │           └── swaggerconfig
+│   │   │               └── SwaggerConfig.java
+│   │   └── resources
+│   │       ├── application.properties
+│   │       ├── static
+│   │       └── templates
+│   └── test
+├── target
+│   ├── classes
+│   │   ├── application.properties
+│   │   ├── com
+│   │   │   └── nineleaps
+│   │   │       ├── constants
+│   │   │       │   └── Constant.class
+│   │   │       ├── controller
+│   │   │       │   ├── EmployeeDataController.class
+│   │   │       │   ├── FeedbackController.class
+│   │   │       │   ├── HrDataController.class
+│   │   │       │   ├── LoginController.class
+│   │   │       │   ├── ManagerDataController.class
+│   │   │       │   └── SuperHrDataController.class
+│   │   │       ├── datarepositories
+│   │   │       │   ├── EmployeeDataRepository.class
+│   │   │       │   ├── EmployeeGoalRepository.class
+│   │   │       │   ├── EmployeeReportRepository.class
+│   │   │       │   ├── HRDataRepository.class
+│   │   │       │   ├── ManagerDataRepository.class
+│   │   │       │   ├── ManagerDetailsRepository.class
+│   │   │       │   └── QuestionAndAnswer.class
+│   │   │       ├── exception
+│   │   │       │   ├── RoleException.class
+│   │   │       │   └── TokenException.class
+│   │   │       ├── interceptor
+│   │   │       │   ├── EmployeeInterceptor.class
+│   │   │       │   ├── HrInterceptor.class
+│   │   │       │   ├── Interceptor.class
+│   │   │       │   ├── ManagerInterceptor.class
+│   │   │       │   ├── SuperHrInterceptor.class
+│   │   │       │   └── TokenInterceptor.class
+│   │   │       ├── oneonone
+│   │   │       │   ├── EmployeeData.class
+│   │   │       │   ├── Employeegoals.class
+│   │   │       │   ├── EmployeeReport.class
+│   │   │       │   ├── ManagerDetails.class
+│   │   │       │   ├── OneonOne.class
+│   │   │       │   └── QuestionandAnswer.class
+│   │   │       ├── services
+│   │   │       │   ├── EmployeeDataServices.class
+│   │   │       │   ├── HRDataServices.class
+│   │   │       │   ├── InterceptorServices.class
+│   │   │       │   ├── ManagerDataServices.class
+│   │   │       │   └── TokenDataServices.class
+│   │   │       └── swaggerconfig
+│   │   │           └── SwaggerConfig.class
+│   │   └── META-INF
+│   │       ├── MANIFEST.MF
+│   │       └── maven
+│   │           └── com.nineleaps
+│   │               └── oneonone
+│   │                   ├── pom.properties
+│   │                   └── pom.xml
+│   ├── javadoc-bundle-options
+│   │   ├── javadoc-options-javadoc-resources.xml
+│   │   └── package-list
+│   ├── site
+│   │   └── apidocs
+│   │       ├── com
+│   │       │   └── nineleaps
+│   │       │       ├── controller
+│   │       │       │   ├── EmployeeDataController.html
+│   │       │       │   ├── FeedbackController.html
+│   │       │       │   ├── HrDataController.html
+│   │       │       │   ├── LoginController.html
+│   │       │       │   ├── ManagerDataController.html
+│   │       │       │   └── SuperHrDataController.html
+│   │       │       ├── interceptor
+│   │       │       │   ├── EmployeeInterceptor.html
+│   │       │       │   ├── HrInterceptor.html
+│   │       │       │   ├── Interceptor.html
+│   │       │       │   ├── ManagerInterceptor.html
+│   │       │       │   └── SuperHrInterceptor.html
+│   │       │       ├── services
+│   │       │       │   ├── EmployeeDataServices.html
+│   │       │       │   ├── HRDataServices.html
+│   │       │       │   ├── ManagerDataServices.html
+│   │       │       │   └── TokenDataServices.html
+│   │       │       └── swaggerconfig
+│   │       │           └── SwaggerConfig.html
+│   │       ├── javadoc.sh
+│   │       ├── options
+│   │       └── packages
+│   ├── sonar
+│   │   └── report-task.txt
+│   └── test-classes
+│       └── com
+│           └── nineleaps
+│               └── SignUpApi
+│                   └── SignUpApiApplicationTests.class
+├── test
+└── tree

@@ -57,7 +57,7 @@ mvn spring-boot:run
 │   │   │           ├── datarepositories\
 │   │   │           │   ├── EmployeeDataRepository.java\
 │   │   │           │   ├── EmployeeGoalRepository.java\
-│   │   │           │   ├── EmployeeReportRepository.java\\
+│   │   │           │   ├── EmployeeReportRepository.java\
 │   │   │           │   ├── HRDataRepository.java\
 │   │   │           │   ├── ManagerDataRepository.java\
 │   │   │           │   ├── ManagerDetailsRepository.java\

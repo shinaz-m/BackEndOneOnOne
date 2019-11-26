@@ -34,8 +34,8 @@ mvn spring-boot:run
 
 **Folder Structure**
 <!-- prettier-ignore-start -->
-.
-├── BackEndOneOnOne.iml
+.\
+├── BackEndOneOnOne.iml\
 ├── mvnw
 ├── mvnw.cmd
 ├── pom.xml
